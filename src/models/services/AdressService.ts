@@ -9,7 +9,7 @@ export class AdressService {
 
   async createAdress(adress: Address): Promise<Address> {
     try {
-      return  await this.adressRepository.createAdress(adress);
+      return await this.adressRepository.createAdress(adress);
     } catch (error) {
       throw error;
     }

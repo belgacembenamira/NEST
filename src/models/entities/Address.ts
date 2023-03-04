@@ -1,9 +1,13 @@
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+/* eslint-disable @typescript-eslint/ban-types */
 import { AddressTypes } from '../enums/AddressTypes';
-@Entity({ name: 'addresses' })
+import { Entity, PrimaryGeneratedColumn, Column } from 'typeorm';
+import { IsNotEmpty } from 'class-validator';
+import { CreateAdresseDto } from '../DTO/CreateAdresseDto';
+
+@Entity({ name: 'adress' })
 export class Address {
   @PrimaryGeneratedColumn()
-  id: number;
+  id: Number;
   @Column()
   street: string;
   @Column()
@@ -12,6 +16,11 @@ export class Address {
   country: string;
   @Column()
   postalCode: number;
-  @Column()
+
+  @Column({
+    type: 'enum',
+    enum: AddressTypes,
+  })
+  @IsNotEmpty({ message: 'required' })
   type: AddressTypes;
 }
